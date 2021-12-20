@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cuentas</string>
+    <string name="seconds_ago">%1$ds ago</string>
+    <string name="minutes_ago">%1$d min ago</string>
+    <string name="today_at">today at %1$s</string>
+    <string name="yesterday_at">yesterday at %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

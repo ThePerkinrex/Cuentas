@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cuentas</string>
+    <string name="seconds_ago">hace %1$ds</string>
+    <string name="minutes_ago">hace %1$d min</string>
+    <string name="today_at">hoy a las %1$s</string>
+    <string name="yesterday_at">ayer a las %1$s</string>
+</resources>
