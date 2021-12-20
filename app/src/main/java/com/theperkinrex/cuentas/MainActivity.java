@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -29,14 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String KEY_LAYOUT_MANAGER = "layoutManager";
-
-
     protected RecyclerView mRecyclerView;
-    protected ExpensesAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected List<Expense> dataset;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,34 +39,51 @@ public class MainActivity extends AppCompatActivity {
 //        findViewById(R.id.constraitLayout).setBackgroundColor(getResources().getColor(R.color.white, getTheme()));
 
         mRecyclerView = findViewById(R.id.expenseGainView);
+
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ExpensesAdapter();
-        Drawable d = mAdapter.getGraph();
+
+        ExpensesAdapter.getInstance().setTotal((TextView)findViewById(R.id.sumTextView));
         addExampleData();
+        Drawable d = ExpensesAdapter.getInstance().getGraph();
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(ExpensesAdapter.getInstance());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
-        ((TextView)findViewById(R.id.sumTextView)).setText(mAdapter.getTotal() + " €");
         ((ImageView)findViewById(R.id.graphView)).setImageDrawable(d);
         ((ImageView)findViewById(R.id.graphView)).refreshDrawableState();
     }
 
     public void refresh(View view) {
         Log.d("REFRESH", "Refreshing");
-        mAdapter.notifyDataSetChanged();
+        ExpensesAdapter.getInstance().notifyDataSetChanged();
     }
 
-    private void addExampleData() {
 
+
+    public void add(View view) {
+        Intent intent = new Intent(this, AddExpense.class);
+//        intent.putExtra(EXPENSE_ADAPTER_EXTRA, mAdapter);
+        startActivity(intent);
+    }
+
+
+    private void addExampleData() {
         Expense e = new Expense(-1, "Copa");
         e.time.set(2021, 7, 25);
-        mAdapter.addExpense(e);
-        mAdapter.addExpense(new Expense(10,"Something"));
+        ExpensesAdapter.getInstance().addExpense(e);
+        ExpensesAdapter.getInstance().addExpense(new Expense(10,"Something"));
         int date = 25;
         for (int i = 0; i<50; i++, date++) {
             Expense t = new Expense((int) ((Math.random() - 0.5) * 100), "Test " + i);
             t.time.set(2021, 7, date);
-            mAdapter.addExpense(t);
+            ExpensesAdapter.getInstance().addExpense(t);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ExpensesAdapter.getInstance().consumeNewExpenseAdded()) {
+            mLayoutManager.scrollToPosition(0);
         }
     }
 }

@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.5567708333333333" />
         <entry key="app/src/main/res/drawable/income.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/stable.xml" value="0.2861111111111111" />
-        <entry key="app/src/main/res/layout/activity_add_expense.xml" value="0.24864130434782608" />
+        <entry key="app/src/main/res/layout/activity_add_expense.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_expense_gain_item.xml" value="0.5724713242961418" />
       </map>

@@ -4,5 +4,11 @@
     <string name="minutes_ago">%1$d min ago</string>
     <string name="today_at">today at %1$s</string>
     <string name="yesterday_at">yesterday at %1$s</string>
+    <string name="expense">Expense</string>
+    <string name="earning">Earning</string>
+    <string name="name">Name</string>
+    <string name="add">Add</string>
+    <string name="quantity">Quantity</string>
+    <string name="cancel">Cancel</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

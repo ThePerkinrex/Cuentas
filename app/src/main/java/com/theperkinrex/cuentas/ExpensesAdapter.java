@@ -20,13 +20,40 @@ import java.util.List;
 
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHolder> {
     private List<Expense> expenses;
+    private TextView total = null;
+    private static ExpensesAdapter self = null;
+    private boolean newExpenseAdded;
 
-    public ExpensesAdapter() {
+    private ExpensesAdapter() {
         this.expenses = new ArrayList<Expense>();
+        registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                if (total != null) {
+                    total.setText(getTotal() + " €");
+                }
+            }
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                onChanged();
+            }
+        });
+        newExpenseAdded = false;
     }
 //    public ExpensesAdapter(List<Expense> expenses) {
 //        this.expenses = expenses;
 //    }
+    public void setTotal(TextView total) {
+        this.total = total;
+    }
+
+    public static ExpensesAdapter getInstance() {
+        if (self == null) {
+            self = new ExpensesAdapter();
+        }
+        return self;
+    }
 
     public void addExpense(Expense e) {
         this.notifyItemInserted(insertExpense(e));
@@ -39,8 +66,19 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
     private int insertExpense(Expense e) {
         int i = 0;
         for(; i < this.expenses.size() && e.time.compareTo(this.expenses.get(i).time) < 0; i++);
+        Log.i("ExpenseAdapter", "Added expense {name: " + e.name +", price: " + e.price + "}");
         expenses.add(i, e);
         return i;
+    }
+
+    public void setNewExpenseAdded() {
+        newExpenseAdded = true;
+    }
+
+    public boolean consumeNewExpenseAdded() {
+        boolean r = newExpenseAdded;
+        newExpenseAdded = false;
+        return r;
     }
 
     public int getTotal() {
@@ -51,6 +89,8 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
         return tot;
     }
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,7 +100,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("ExpenseAdapter", ">> " + position);
+//        Log.d("ExpenseAdapter", ">> " + position);
 
         holder.set(expenses.get(position));
     }

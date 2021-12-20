@@ -5,4 +5,10 @@
     <string name="minutes_ago">hace %1$d min</string>
     <string name="today_at">hoy a las %1$s</string>
     <string name="yesterday_at">ayer a las %1$s</string>
+    <string name="expense">Gasto</string>
+    <string name="earning">Ingreso</string>
+    <string name="add">Añadir</string>
+    <string name="name">Nombre</string>
+    <string name="quantity">Cantidad</string>
+    <string name="cancel">Cancelar</string>
 </resources>
