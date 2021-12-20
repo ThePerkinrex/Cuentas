@@ -57,41 +57,13 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/quantity"
-        android:inputType="number"
+        android:inputType="number|numberDecimal"
+        android:numeric="integer|decimal"
         android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ExpenseName" />
-
-    <RadioGroup
-        android:id="@+id/EarningOrExpense"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ExpenseQuantity">
-
-        <RadioButton
-            android:id="@+id/radioButtonEarning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/earning"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/radioButtonExpense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/expense"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="18sp" />
-
-    </RadioGroup>
 
     <TextView
         android:id="@+id/textView"
@@ -107,5 +79,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ExpenseQuantity" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/EarningOrExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:checked="true"
+        android:onClick="switchExpense"
+        android:textAllCaps="true"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ExpenseQuantity"
+        app:thumbTint="@color/expense"
+        app:trackTint="@color/expenseTranslucent"
+        app:trackTintMode="src_in" />
+
+    <TextView
+        android:id="@+id/EarningOrExpenseLabelText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/expense"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EarningOrExpense"
+        app:layout_constraintEnd_toStartOf="@+id/EarningOrExpense"
+        app:layout_constraintStart_toEndOf="@+id/EarningOrExpenseIcon"
+        app:layout_constraintTop_toTopOf="@+id/EarningOrExpense" />
+
+    <ImageView
+        android:id="@+id/EarningOrExpenseIcon"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/EarningOrExpense"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/EarningOrExpense"
+        app:srcCompat="@drawable/expense" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

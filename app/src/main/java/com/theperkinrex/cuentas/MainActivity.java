@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         ExpensesAdapter.getInstance().setTotal((TextView)findViewById(R.id.sumTextView));
         addExampleData();
-        Drawable d = ExpensesAdapter.getInstance().getGraph();
+        Drawable d = ExpensesAdapter.getInstance().getGraph(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(ExpensesAdapter.getInstance());
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
@@ -67,16 +67,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void addExampleData() {
-        Expense e = new Expense(-1, "Copa");
-        e.time.set(2021, 7, 25);
-        ExpensesAdapter.getInstance().addExpense(e);
-        ExpensesAdapter.getInstance().addExpense(new Expense(10,"Something"));
-        int date = 25;
-        for (int i = 0; i<50; i++, date++) {
-            Expense t = new Expense((int) ((Math.random() - 0.5) * 100), "Test " + i);
-            t.time.set(2021, 7, date);
-            ExpensesAdapter.getInstance().addExpense(t);
-        }
+//        Expense e = new Expense(-100, "Copa");
+//        e.time.set(2021, 7, 25);
+//        ExpensesAdapter.getInstance().addExpense(e);
+//        ExpensesAdapter.getInstance().addExpense(new Expense(1000,"Something"));
+//        int date = 25;
+//        for (int i = 0; i<50; i++, date++) {
+//            Expense t = new Expense((int) ((Math.random() - 0.5) * 10000), "Test " + i);
+//            t.time.set(2021, 7, date);
+//            ExpensesAdapter.getInstance().addExpense(t);
+//        }
     }
 
     @Override

@@ -1,13 +1,19 @@
 package com.theperkinrex.cuentas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 public class AddExpense extends AppCompatActivity {
 //    private static final String EXPENSE_NAME_EXTRA = "EXPENSE_NAME";
@@ -19,15 +25,30 @@ public class AddExpense extends AppCompatActivity {
         setContentView(R.layout.activity_add_expense);
     }
 
+    public void switchExpense(View view) {
+        SwitchCompat s = ((SwitchCompat) findViewById(R.id.EarningOrExpense));
+        if (s.isChecked()) {
+            ((TextView) findViewById(R.id.EarningOrExpenseLabelText)).setText(R.string.expense);
+            ((ImageView) findViewById(R.id.EarningOrExpenseIcon)).setImageResource(R.drawable.expense);
+            s.setTrackTintList(view.getResources().getColorStateList(R.color.expenseTranslucent, view.getContext().getTheme()));
+            s.setThumbTintList(view.getResources().getColorStateList(R.color.expense, view.getContext().getTheme()));
+        }else {
+            ((TextView) findViewById(R.id.EarningOrExpenseLabelText)).setText(R.string.earning);
+            ((ImageView) findViewById(R.id.EarningOrExpenseIcon)).setImageResource(R.drawable.income);
+            s.setTrackTintList(view.getResources().getColorStateList(R.color.incomeTranslucent, view.getContext().getTheme()));
+            s.setThumbTintList(view.getResources().getColorStateList(R.color.income, view.getContext().getTheme()));
+        }
+    }
+
     public void add(View view) {
         EditText name = findViewById(R.id.ExpenseName);
         EditText quantity = findViewById(R.id.ExpenseQuantity);
-        RadioGroup expense_or_earning = findViewById(R.id.EarningOrExpense);
-        int radioId = expense_or_earning.getCheckedRadioButtonId();
-        if (radioId == -1) {
-            return;
-        }
-        boolean isExpense = radioId == R.id.radioButtonExpense;
+//        RadioGroup expense_or_earning = findViewById(R.id.EarningOrExpense);
+//        int radioId = expense_or_earning.getCheckedRadioButtonId();
+//        if (radioId == -1) {
+//            return;
+//        }
+        boolean isExpense = ((SwitchCompat)findViewById(R.id.EarningOrExpense)).isChecked();//radioId == R.id.radioButtonExpense;
         String nameS = name.getText().toString();
         if (nameS.isEmpty()) {
             return;
@@ -36,7 +57,7 @@ public class AddExpense extends AppCompatActivity {
         if (q.isEmpty() || q.startsWith("-")) {
             return;
         }
-        int quantityInt = Integer.parseInt(q);
+        int quantityInt = (int) (Float.parseFloat(q) * 100);
         if (isExpense) {
             quantityInt = -quantityInt;
         }

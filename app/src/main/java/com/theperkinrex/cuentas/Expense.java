@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Expense {
+    // Price is stored in cents
     public int price;
     public String name;
     public GregorianCalendar time;

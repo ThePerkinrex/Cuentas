@@ -16,4 +16,9 @@
     <color name="orange1">#F4A261</color>
     <color name="red1">#E76F51</color>
     <color name="darker">#90000000</color>
+    <color name="income">#1E8426</color>
+    <color name="incomeTranslucent">#751E8426</color>
+    <color name="expense">#841E1E</color>
+    <color name="expenseTranslucent">#75841E1E</color>
+
 </resources>

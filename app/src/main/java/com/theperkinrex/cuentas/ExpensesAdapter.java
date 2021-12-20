@@ -1,6 +1,7 @@
 package com.theperkinrex.cuentas;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -30,7 +31,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
             @Override
             public void onChanged() {
                 if (total != null) {
-                    total.setText(getTotal() + " €");
+                    total.setText(String.format("%.2f", ((float) getTotal()) / 100f )+ " €");
                 }
             }
 
@@ -59,14 +60,14 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
         this.notifyItemInserted(insertExpense(e));
     }
 
-    public GraphDrawable getGraph() {
-        return new GraphDrawable(this.expenses);
+    public GraphDrawable getGraph(Context ctx) {
+        return new GraphDrawable(this.expenses, ctx);
     }
 
     private int insertExpense(Expense e) {
         int i = 0;
         for(; i < this.expenses.size() && e.time.compareTo(this.expenses.get(i).time) < 0; i++);
-        Log.i("ExpenseAdapter", "Added expense {name: " + e.name +", price: " + e.price + "}");
+//        Log.i("ExpenseAdapter", "Added expense {name: " + e.name +", price: " + e.price + "}");
         expenses.add(i, e);
         return i;
     }
@@ -134,18 +135,20 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
             dateTextView.setText(DateTimeFormatter.formatTime(res, e.time));
             String prefix = "";
             // TODO Add color & more
+            int price = e.price;
             if (e.price > 0) {
                 prefix = "+ ";
                 iconView.setImageResource(R.drawable.income);
             }else if (e.price < 0) {
-
+                prefix = "- ";
+                price = -price;
                 iconView.setImageResource(R.drawable.expense);
             }else {
 
                 iconView.setImageResource(R.drawable.stable);
             }
 
-            priceTextView.setText(prefix + e.price + " €");
+            priceTextView.setText(prefix + String.format("%.2f", ((float) price) / 100f) + " €");
 
         }
 

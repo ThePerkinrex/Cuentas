@@ -1,5 +1,7 @@
 package com.theperkinrex.cuentas;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -20,56 +22,64 @@ public class GraphDrawable extends Drawable {
     private final List<Expense> expenses;
 
 
-    public GraphDrawable(List<Expense> expenses) {
+    public GraphDrawable(List<Expense> expenses, Context ctx) {
         this.expenses = expenses;
         Paint stroke = new Paint();
         stroke.setStrokeWidth(4);
         redPaint = new Paint(stroke);
-        redPaint.setARGB(255, 0x84, 0x1E, 0x1E);
+//        redPaint.setARGB(255, 0x84, 0x1E, 0x1E);
+        redPaint.setColor(ctx.getResources().getColor(R.color.expense, ctx.getTheme()));
         greenPaint = new Paint(stroke);
-        greenPaint.setARGB(255, 0x1E, 0x84, 0x26);
+//        greenPaint.setARGB(255, 0x1E, 0x84, 0x26);
+        greenPaint.setColor(ctx.getResources().getColor(R.color.income, ctx.getTheme()));
         greyPaint = new Paint(stroke);
         greyPaint.setARGB(255, 125, 125, 125);
+        greyPaint.setTextSize(60);
         zeroPaint = new Paint();
         zeroPaint.setStrokeWidth(2);
-        zeroPaint.setARGB(200,175,175,175);
+        zeroPaint.setARGB(200, 175, 175, 175);
     }
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        float x = MARGIN;
+        if (expenses.size() > 1) {
+            float x = MARGIN;
 //        int w = getBounds().width() - 2 * x;
-        int start = 0;
-        int max_y = 0;
-        int min_y = 0;
-        for (int i = expenses.size() - 1; i >= 0; i--) {
-            start += expenses.get(i).price;
-            max_y = Math.max(max_y, start);
-            min_y = Math.min(min_y, start);
-        }
-        canvas.drawLine(0, ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, getBounds().width(), ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, zeroPaint);
-
-        long min_time = expenses.get(expenses.size() - 1).time.getTime().getTime(); // Oldest
-        long max_time = expenses.get(0).time.getTime().getTime() - min_time; // NOW
-        start = 0;
-//        Log.i("LINE_PREP", "MaxY: " + max_y + "   height: " + getBounds().height());
-        for (int i = expenses.size() - 1; i >= 0; i--) {
-            Expense e = expenses.get(i);
-            int fut_m = start + e.price;
-            float fut_x = (float) ((double) (e.time.getTime().getTime() - min_time) * ((double) (getBounds().width() - 2 * MARGIN)) / (double) max_time) + MARGIN;
-            Paint p = greyPaint;
-            if (e.price < 0) {
-                p = redPaint;
-            } else if (e.price > 0) {
-                p = greenPaint;
+            int start = 0;
+            int max_y = 0;
+            int min_y = 0;
+            for (int i = expenses.size() - 1; i >= 0; i--) {
+                start += expenses.get(i).price;
+                max_y = Math.max(max_y, start);
+                min_y = Math.min(min_y, start);
             }
+            canvas.drawLine(0, ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, getBounds().width(), ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, zeroPaint);
+
+            long min_time = expenses.get(expenses.size() - 1).time.getTime().getTime(); // Oldest
+            long max_time = expenses.get(0).time.getTime().getTime() - min_time; // NOW
+            start = 0;
+//        Log.i("LINE_PREP", "MaxY: " + max_y + "   height: " + getBounds().height());
+            for (int i = expenses.size() - 1; i >= 0; i--) {
+                Expense e = expenses.get(i);
+                int fut_m = start + e.price;
+                float fut_x = (float) ((double) (e.time.getTime().getTime() - min_time) * ((double) (getBounds().width() - 2 * MARGIN)) / (double) max_time) + MARGIN;
+                Paint p = greyPaint;
+                if (e.price < 0) {
+                    p = redPaint;
+                } else if (e.price > 0) {
+                    p = greenPaint;
+                }
 //            Log.i("LINE_START_Y", ((float) getBounds().height()) + "  " + ((((float) (start - min_y)) * (((float) getBounds().height() - 20f) / (float) (max_y - min_y)) + 10f)));
-            float sy = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (start - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
-            float ey = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (fut_m - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
+                float sy = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (start - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
+                float ey = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (fut_m - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
 //            Log.i("LINE", x + "," + sy + " ::: " + fut_x + "," + ey);
-            canvas.drawLine(x, sy, fut_x, ey, p);
-            start = fut_m;
-            x = fut_x;
+                canvas.drawLine(x, sy, fut_x, ey, p);
+                start = fut_m;
+                x = fut_x;
+            }
+
+        }else{
+            canvas.drawText("Not enough data", 10,100, greyPaint);
         }
     }
 

@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.5557291666666667" />
+        <entry key="..\:/Users/juanm/StudioProjects/Cuentas/app/src/main/res/drawable/expense.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/juanm/StudioProjects/Cuentas/app/src/main/res/drawable/income.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/juanm/StudioProjects/Cuentas/app/src/main/res/layout/activity_add_expense.xml" value="0.4" />
+        <entry key="..\:/Users/juanm/StudioProjects/Cuentas/app/src/main/res/layout/activity_main.xml" value="0.536" />
         <entry key="app/src/main/res/drawable/edit.xml" value="0.3375" />
         <entry key="app/src/main/res/drawable/expense.xml" value="0.3375" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.5567708333333333" />
@@ -15,7 +19,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
