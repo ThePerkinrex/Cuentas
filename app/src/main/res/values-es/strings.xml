@@ -11,4 +11,5 @@
     <string name="name">Nombre</string>
     <string name="quantity">Cantidad</string>
     <string name="cancel">Cancelar</string>
+    <string name="new_expense">Nuevo gasto</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Cuentas.TextInputLayout.OutlinedBox"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeErrorColor">@color/expense</item>
+        <item name="errorIconTint">@color/expense</item>
+        <item name="errorTextColor">@color/expense</item>
+        <item name="errorIconDrawable">@android:drawable/stat_notify_error</item>
+        <item name="helperTextTextAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
+        </item>
+    </style>
+</resources>

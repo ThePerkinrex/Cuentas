@@ -10,5 +10,6 @@
     <string name="add">Add</string>
     <string name="quantity">Quantity</string>
     <string name="cancel">Cancel</string>
+    <string name="new_expense">New expense</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

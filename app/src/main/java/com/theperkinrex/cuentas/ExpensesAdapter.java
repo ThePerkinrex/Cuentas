@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.List;
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHolder> {
     private List<Expense> expenses;
     private TextView total = null;
+    private ImageView graph = null;
     private static ExpensesAdapter self = null;
     private boolean newExpenseAdded;
 
@@ -33,10 +36,19 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 if (total != null) {
                     total.setText(String.format("%.2f", ((float) getTotal()) / 100f )+ " €");
                 }
+                if (graph != null) {
+//                    Log.i("REDRAW", "REDRAW REQUESTED")
+;                    graph.invalidate();
+                }
             }
 
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
+                onChanged();
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
                 onChanged();
             }
         });
@@ -48,6 +60,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
     public void setTotal(TextView total) {
         this.total = total;
     }
+    public void setGraph(ImageView graph) {
+        this.graph = graph;
+    }
 
     public static ExpensesAdapter getInstance() {
         if (self == null) {
@@ -58,6 +73,11 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
     public void addExpense(Expense e) {
         this.notifyItemInserted(insertExpense(e));
+    }
+
+    public void removeExpense(int i) {
+        this.expenses.remove(i);
+        this.notifyItemRemoved(i);
     }
 
     public GraphDrawable getGraph(Context ctx) {
@@ -89,8 +109,6 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
         }
         return tot;
     }
-
-
 
     @NonNull
     @Override
@@ -131,6 +149,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
         @SuppressLint("SetTextI18n")
         public void set(Expense e) {
+//            ((CardView) view.findViewById(R.id.card)).setCardBackgroundColor(res.getColor(R.color.blackBg, view.getContext().getTheme()));
             nameTextView.setText(e.name);
             dateTextView.setText(DateTimeFormatter.formatTime(res, e.time));
             String prefix = "";

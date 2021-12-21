@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class AddExpense extends AppCompatActivity {
 //    private static final String EXPENSE_NAME_EXTRA = "EXPENSE_NAME";
@@ -26,7 +27,7 @@ public class AddExpense extends AppCompatActivity {
     }
 
     public void switchExpense(View view) {
-        SwitchCompat s = ((SwitchCompat) findViewById(R.id.EarningOrExpense));
+        SwitchMaterial s = findViewById(R.id.EarningOrExpense);
         if (s.isChecked()) {
             ((TextView) findViewById(R.id.EarningOrExpenseLabelText)).setText(R.string.expense);
             ((ImageView) findViewById(R.id.EarningOrExpenseIcon)).setImageResource(R.drawable.expense);
@@ -41,16 +42,22 @@ public class AddExpense extends AppCompatActivity {
     }
 
     public void add(View view) {
-        EditText name = findViewById(R.id.ExpenseName);
-        EditText quantity = findViewById(R.id.ExpenseQuantity);
+        TextInputEditText name = findViewById(R.id.ExpenseName);
+        TextInputEditText quantity = findViewById(R.id.ExpenseQuantity);
 //        RadioGroup expense_or_earning = findViewById(R.id.EarningOrExpense);
 //        int radioId = expense_or_earning.getCheckedRadioButtonId();
 //        if (radioId == -1) {
 //            return;
 //        }
         boolean isExpense = ((SwitchCompat)findViewById(R.id.EarningOrExpense)).isChecked();//radioId == R.id.radioButtonExpense;
+        if (name.getText() == null) {
+            return;
+        }
         String nameS = name.getText().toString();
         if (nameS.isEmpty()) {
+            return;
+        }
+        if (quantity.getText() == null) {
             return;
         }
         String q = quantity.getText().toString();

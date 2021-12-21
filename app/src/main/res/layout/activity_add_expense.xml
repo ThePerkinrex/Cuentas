@@ -8,16 +8,16 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="?colorPrimary"
+        android:layout_marginEnd="16dp"
         android:enabled="true"
         android:onClick="add"
         android:text="@string/add"
         android:textAllCaps="true"
         android:textColor="?colorOnPrimary"
-        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/cancelButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,10 @@
 
     <Button
         android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:onClick="cancel"
         android:text="@string/cancel"
         app:layout_constraintBaseline_toBaselineOf="@+id/button"
@@ -34,36 +36,88 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button" />
 
-    <EditText
-        android:id="@+id/ExpenseName"
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/textInputLayout"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="64dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+
+    <!--        android:ems="10"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--        <com.google.android.material.textfield.TextInputEditText-->
+    <!--            android:id="@+id/ExpenseName"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:hint=""-->
+    <!--            android:inputType="textAutoComplete"-->
+    <!--            android:singleLine="true"-->
+    <!--            android:textColor="?android:textColorPrimary" />-->
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/item_name_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
         android:hint="@string/name"
-        android:inputType="textPersonName"
-        android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-    <EditText
-        android:id="@+id/ExpenseQuantity"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ExpenseName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textAutoComplete"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/item_quantity_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
         android:hint="@string/quantity"
-        android:inputType="number|numberDecimal"
-        android:numeric="integer|decimal"
-        android:textColor="?android:textColorPrimary"
+        app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ExpenseName" />
+        app:layout_constraintTop_toBottomOf="@+id/item_name_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ExpenseQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number|numberDecimal"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/ExpenseQuantity"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="@string/quantity"-->
+    <!--        android:inputType="number|numberDecimal"-->
+    <!--        android:numeric="integer|decimal"-->
+    <!--        android:textColor="?android:textColorPrimary"-->
+    <!--        app:hintEnabled="true"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/textView"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/item_name_label" />-->
 
     <TextView
         android:id="@+id/textView"
@@ -72,27 +126,26 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="€"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ExpenseQuantity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/item_quantity_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ExpenseQuantity" />
+        app:layout_constraintStart_toEndOf="@+id/item_quantity_label" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/EarningOrExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="36dp"
         android:checked="true"
         android:onClick="switchExpense"
         android:textAllCaps="true"
         android:textColor="?android:textColorPrimary"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ExpenseQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/item_quantity_label"
         app:thumbTint="@color/expense"
         app:trackTint="@color/expenseTranslucent"
         app:trackTintMode="src_in" />
@@ -103,8 +156,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:letterSpacing="0.02"
         android:text="@string/expense"
-        android:textColor="?android:textColorSecondary"
+        android:textAllCaps="true"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/EarningOrExpense"
         app:layout_constraintEnd_toStartOf="@+id/EarningOrExpense"
@@ -120,5 +174,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/EarningOrExpense"
         app:srcCompat="@drawable/expense" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:letterSpacing="0.05"
+        android:text="@string/new_expense"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,7 @@ public class GraphDrawable extends Drawable {
     @Override
     public void draw(@NonNull Canvas canvas) {
         if (expenses.size() > 1) {
+//            Log.i("GRAPH", "REDRAWING");
             float x = MARGIN;
 //        int w = getBounds().width() - 2 * x;
             int start = 0;
