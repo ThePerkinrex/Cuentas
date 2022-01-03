@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class GraphDrawable extends Drawable {
@@ -83,6 +84,54 @@ public class GraphDrawable extends Drawable {
         }else{
             canvas.drawText("Not enough data", 10,100, greyPaint);
         }
+
+//        float w = getBounds().width() - 2 * MARGIN;
+//        int start = 0;
+//        int max_y = 10;
+//        int min_y = -10;
+//        long min_diff = Long.MAX_VALUE;
+//        for (int i = expenses.size() - 1; i >= 0; i--) {
+//            start += expenses.get(i).price;
+//            max_y = Math.max(max_y, start);
+//            min_y = Math.min(min_y, start);
+//            if (i != 0) {
+//                long diff = expenses.get(i-1).time.getTime().getTime() - expenses.get(i).time.getTime().getTime();
+//                if (diff <= 1) {
+//                    Log.i("Graph", "Diff: " + diff);
+//                    Log.i("Graph", "[-1] Name: " + expenses.get(i-1).name + " T: " + expenses.get(i-1).time.getTime());
+//                    Log.i("Graph", "[+0] Name: " + expenses.get(i).name + " T: " + expenses.get(i).time.getTime());
+//                }
+//                min_diff = Math.min(min_diff, diff / 1000);
+//
+//            }
+//        }
+//
+//        start = 0;
+//        canvas.drawLine(0, ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, getBounds().width(), ((float) getBounds().height() - 2 * MARGIN) - ((((float) (-min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN, zeroPaint);
+//        if (expenses.size() > 0) {
+//            long min_time = expenses.get(expenses.size() - 1).time.getTime().getTime() / 1000; // Oldest
+//            long max_time = GregorianCalendar.getInstance().getTime().getTime() / 1000 ; // NOW
+//            long diff = max_time - min_time;
+//            double step = ((double) min_diff) / ((double) diff) * ((double) w);
+//            Log.i("Graph", "MinDiff: " + min_diff + " Diff: " + diff);
+//            for (int i = expenses.size() - 1; i >= 0; i--) {
+//                Expense e = expenses.get(i);
+//                int fut = start + e.price;
+//                Paint p = greyPaint;
+//                if (e.price < 0) {
+//                    p = redPaint;
+//                } else if (e.price > 0) {
+//                    p = greenPaint;
+//                }
+//                float sy = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (start - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
+//                float ey = ((float) getBounds().height() - 2 * MARGIN) - ((((float) (fut - min_y)) * (((float) getBounds().height() - 2 * MARGIN) / (float) (max_y - min_y)))) + MARGIN;
+//                double boxw = Math.max(step * 0.8, 5d);
+//                double x = ((double) e.time.getTime().getTime() / 1000 - min_time) / ((double) diff) * (double) w + MARGIN;// + boxw / 2d;
+//                canvas.drawRoundRect((float) (x - boxw / 2f), sy, (float) (x + boxw / 2f), ey, (float) (boxw / 4.0), (float) (boxw / 4.0), p);
+//                Log.i("Graph", "start: " + sy + " x: " + x + " step: " + step + " height: " + getBounds().height() + " width: " + getBounds().width());
+//                start = fut;
+//            }
+//        }
     }
 
     @Override
